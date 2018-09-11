@@ -1,0 +1,14 @@
+#/bin/bash
+userhost=$1
+input=$2
+if [ $userhost = "r" ]; then
+	ssh_with_options.sh ronny tricky.cs.umd.edu $input
+elif [ $userhost = "m" ]; then
+	ssh_with_options.sh rhuang max.cs.umd.edu $input
+elif [ $userhost = "t" ]; then
+	ssh_with_options.sh ronny tomg3264.cs.umd.edu $input
+elif [ $userhost = "p" ]; then
+	ssh_with_options.sh paperspace 184.105.157.215 $input
+else
+	echo please provide user and host
+fi
