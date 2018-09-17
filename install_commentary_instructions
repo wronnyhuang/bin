@@ -1,4 +1,0 @@
-run the following in Vim:
-
-:source %
-:PluginInstall

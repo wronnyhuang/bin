@@ -4,7 +4,7 @@ if [ $1 = "n" ]; then
 elif [ $1 = "p" ]; then
 	watch -n .1 'ps aux | grep log_root'
 elif [ $1 = "l" ]; then
-	watch -n .1 read_logs.sh $2
+	watch -n .1 read_logs.sh $2 specreg
 elif [ $1 = "a" ]; then
 	userhost=( ronny@tricky.cs.umd.edu ronny@tomg3264.cs.umd.edu rhuang@max.cs.umd.edu )
 	for uh in "${userhost[@]}"
