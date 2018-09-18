@@ -1,6 +1,7 @@
 #!/bin/bash
 pkill -f 'tensorboard --port=6006'
-logdir=${1:-./}
+logdir=${1:-~/ckpt/specreg/}
+echo $logdir
 nohup tensorboard --port=6006 --logdir=$logdir &
 echo tensorboarding directory $logdir
 if [ $2 = "n" ]; then
