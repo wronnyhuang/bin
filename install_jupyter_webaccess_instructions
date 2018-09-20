@@ -1,0 +1,14 @@
+first run
+
+jupyter notebook password
+
+and set a pssword
+then run
+
+jupyter notebook --generate-config
+
+and open the displayed python file. then uncomment and modify the following
+
+c.NotebookApp.ip = '*'
+c.NotebookApp.open_browser = False
+c.NotebookApp.port = 8888

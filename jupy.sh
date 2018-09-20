@@ -1,6 +1,6 @@
 #!/bin/bash
 port=8888
-killall jupyter-notebook
+pkill -f jupyter-notebook
 sleep 1
 nohup jupyter notebook --port=$port 2> /tmp/nohup.out &
 echo jupyter notebook at port $port
