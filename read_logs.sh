@@ -2,7 +2,7 @@
 log_root=$1
 var=$log_root
 exptname=$2
-logdir=~/ckpt/$exptname
+logdir=~/Dropbox/ckpt/$exptname
 echo ------------------- TRAIN LOG $var  --------------------
 tail -n 5 $logdir/$var/logtrain.log
 var=$(($var+1))
