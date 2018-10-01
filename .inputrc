@@ -40,8 +40,8 @@ TAB: menu-complete
 "\e[Z": menu-complete-backward
 
 # Option-up/option-down should also apply to insert mode
-"\e\e[A": history-search-backward
-"\e\e[B": history-search-forward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
 
 # Needed because binding 'p' in command mode above wipes its insert mode
 # function, too. This fixes that, and will insert 'p' when you type 'p'.
