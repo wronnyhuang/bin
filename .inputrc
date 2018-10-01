@@ -26,6 +26,8 @@ set keymap vi-command
 # to set plain up/down to do a history search by default.
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+"k: history-search-backward
+"j": history-search-forward
 
 # so that vim doesnt always open when i accidentally type v
 "v": history-search-backward
