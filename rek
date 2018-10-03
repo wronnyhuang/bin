@@ -1,8 +1,9 @@
 #!/bin/bash
+# REgexKill kill processes based on regex pattern
 my_pattern=$1
 for KILLPID in `ps aux | grep $my_pattern | awk ' { print $2;}'`; do 
 	echo KILLING PID $KILLPID
-	ps aux | grep $KILLPID.*log_root
+	ps aux | grep $KILLPID.*$my_pattern
   kill -9 $KILLPID;
 	echo ' '
 done
