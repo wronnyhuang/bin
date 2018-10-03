@@ -1,0 +1,8 @@
+#!/bin/bash
+my_pattern=$1
+for KILLPID in `ps aux | grep $my_pattern | awk ' { print $2;}'`; do 
+	echo KILLING PID $KILLPID
+	ps aux | grep $KILLPID.*log_root
+  kill -9 $KILLPID;
+	echo ' '
+done
