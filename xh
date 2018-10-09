@@ -7,6 +7,8 @@ elif [ $userhost = "m" ]; then
 	ssh_with_options.sh rhuang max.cs.umd.edu $input
 elif [ $userhost = "t" ]; then
 	ssh_with_options.sh ronny tomg3264.cs.umd.edu $input
+elif [ $userhost = "v" ]; then
+	ssh_with_options.sh jdegange 40.84.3.103 $input
 elif [ $userhost = "p" ]; then
 	ssh_with_options.sh paperspace 184.105.157.215 $input
 else
