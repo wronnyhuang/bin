@@ -8,11 +8,11 @@ elif [ $userhost = "m" ]; then
 elif [ $userhost = "t" ]; then
 	ssh_with_options.sh ronny tomg3264.cs.umd.edu $input
 elif [ $userhost = "v" ]; then
-	ssh_with_options.sh ronny 40.84.3.103 $input
+	ssh_with_options.sh ronny dsvm6usdum456zy76.eastus.cloudapp.azure.com $input
+elif [ $userhost = "u" ]; then
+	ssh_with_options.sh ronny 10.143.32.252 $input
 elif [ $userhost = "d" ]; then
 	ssh_with_options.sh docadmin 10.246.59.58 $input
-elif [ $userhost = "p" ]; then
-	ssh_with_options.sh paperspace 184.105.157.215 $input
 else
 	echo please provide user and host
 fi
