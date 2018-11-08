@@ -1,0 +1,6 @@
+#!/bin/bash
+docker run --runtime=nvidia -it --rm \
+-v ~/bin:/root/bin \
+-v ~/htr:/root/htr \
+-v ~/datasets:/root/datasets \
+wrhuang/default bash
