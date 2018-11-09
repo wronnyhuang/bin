@@ -3,5 +3,5 @@ docker run --runtime=nvidia -it $1 \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
 -v ~/datasets:/root/datasets \
--v ~/htr:/root/htr \
+-v ~/repo:/root/repo \
 wrhuang/default bash
