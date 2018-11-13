@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo `hostname` > ~/misc/hostname.log
+
 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
 docker run --runtime=nvidia -it \
