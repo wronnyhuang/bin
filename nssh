@@ -3,15 +3,28 @@ service ssh restart
 pkill -f ngrok
 
 index=$1
-if [ $index = m ]; then # wrhuang@mit.edu
+hname=`hostname`
+if [ "$hname" = "max" ]; then
   ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
-elif [ $index = r ]; then # wrhuang@umd.edu
+elif [ "$hname" = "tricky" ]; then
   ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
-elif [ $index = t ]; then # wronnyhuang@gmail.com
+elif [ "$hname" = "tomg3264" ]; then
   ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
-elif [ $index = v ]; then # wenqianh@gmail.com
+elif [ "$hname" = "deepelearner2" ]; then
   ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
+else
+	echo invalid hostname!! update nssh script
 fi
+
+# if [ $index = m ]; then # wrhuang@mit.edu
+#   ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
+# elif [ $index = r ]; then # wrhuang@umd.edu
+#   ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
+# elif [ $index = t ]; then # wronnyhuang@gmail.com
+#   ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
+# elif [ $index = v ]; then # wenqianh@gmail.com
+#   ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
+# fi
 
 nohup ngrok tcp 22 &
 sleep 1
