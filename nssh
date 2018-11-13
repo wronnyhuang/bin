@@ -31,4 +31,4 @@ fi
 nohup ngrok tcp 22 &
 sleep 1
 curl -s http://localhost:4040/api/tunnels | python3 -c \
-	"import sys, json; address = json.load(sys.stdin)['tunnels'][0]['public_url']; open('/root/misc/ngrokport.log','w+').write('$hname: '+address); print(address)"
+	"import sys, json; address = json.load(sys.stdin)['tunnels'][0]['public_url']; open('/root/misc/ngrokport.log','w+').write('`date` $hname: '+address); print(address)"
