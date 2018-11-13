@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo `hostname` > ~/misc/hostname.log
+mkdir ~/misc
 
 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
