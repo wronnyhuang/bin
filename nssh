@@ -2,8 +2,9 @@
 service ssh restart
 pkill -f ngrok
 
-index=$1
-hname=`hostname`
+# index=$1
+# hname=`hostname`
+hname=$1
 if [ "$hname" = "max" ]; then
   ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
 elif [ "$hname" = "tricky" ]; then
@@ -13,7 +14,7 @@ elif [ "$hname" = "tomg3264" ]; then
 elif [ "$hname" = "deepelearner2" ]; then
   ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
 else
-	echo invalid hostname!! update nssh script
+	echo invalid hostname given!! update nssh script
 fi
 
 # if [ $index = m ]; then # wrhuang@mit.edu
@@ -29,4 +30,4 @@ fi
 nohup ngrok tcp 22 &
 sleep 1
 curl -s http://localhost:4040/api/tunnels | python3 -c \
-	"import sys, json; address = json.load(sys.stdin)['tunnels'][0]['public_url']; open('$HOME/portinfo.log','w+').write(address); print(address)"
+	"import sys, json; address = json.load(sys.stdin)['tunnels'][0]['public_url']; open('$HOME/misc/portinfo.log','w+').write($hname+': '+address); print(address)"
