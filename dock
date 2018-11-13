@@ -13,7 +13,6 @@ docker run --runtime=nvidia -it \
 -v ~/datasets:/root/datasets \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
--d \
 wrhuang/default bash > ~/misc/containerId.log
 
 cat ~/misc/ngrokport.log
