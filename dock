@@ -5,6 +5,8 @@ mkdir ~/misc
 
 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
+docker pull wrhuang/default
+
 docker run --runtime=nvidia -it \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
