@@ -2,6 +2,7 @@
 userhost=( ronny@tricky.cs.umd.edu ronny@tomg3264.cs.umd.edu rhuang@max.cs.umd.edu ronny@dsvm6usdum456zy76.eastus.cloudapp.azure.com)
 for uh in "${userhost[@]}"
 do
-	ssh -t $uh sh -c "echo && echo && echo ===>\`hostname\` && cd \$HOME/bin && git pull && docker pull wrhuang/default && . \$HOME/bin/dock && echo"
+	ssh -t $uh sh -c "echo && echo && echo ===>\`hostname\` && cd \$HOME/bin && git pull && docker pull wrhuang/default && . \$HOME/bin/dock"
 done
+echo === nports ===
 nports
