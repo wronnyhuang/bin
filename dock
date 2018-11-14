@@ -16,5 +16,7 @@ docker run --runtime=nvidia -it \
 -d \
 wrhuang/default bash > ~/misc/containerId.log
 
+docker exec -d `cat ~/misc/containerId.log` /root/nssh
+
 cat ~/misc/ngrokport.log
 echo
