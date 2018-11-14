@@ -6,7 +6,8 @@ RUN apt-get install -y openssh-server && apt-get clean
 #RUN apt-get install -y openbox && apt-get clean
 RUN pip install editdistance
 RUN git clone https://github.com/wronnyhuang/bin
-RUN echo nssh >> ~/.bashrc
 
 WORKDIR "/root"
-CMD ["nssh"]
+#CMD ["nssh"]
+ENTRYPOINT [ "sh", "-c", "/root/bin/nssh"]
+#CMD [ "sh", "-c", "/root/bin/nssh"]
