@@ -36,7 +36,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -49,7 +49,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-color_prompt=yes
 if [ "$color_prompt" = yes ]; then
 		PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;90m\]\w\[\033[00m\]\$ '
 else
@@ -100,6 +99,8 @@ fi
 #fi
 . /opt/conda/etc/profile.d/conda.sh
 conda activate base
+
+# setup path and terminal colors
 export PATH=/root/bin:$PATH
-LS_COLORS=$LS_COLORS:'di=1;31:ln=34' ; export LS_COLORS; ls
+LS_COLORS=$LS_COLORS:'di=1;31:ln=34' ; export LS_COLORS;
 echo Welcome to wrhuang/default docker container
