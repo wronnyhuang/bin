@@ -9,11 +9,12 @@ RUN git clone https://github.com/wronnyhuang/bin /root/bin
 RUN cp /root/bin/.bashrc /root/
 RUN cp /root/bin/nssh /root/bin/ngrok /root/
 RUN rm -rf /root/bin
+RUN echo "echo hello" > /root/echofile
 
 WORKDIR "/root"
 #CMD ["nssh"]
 #ENTRYPOINT [ "/root/bin/nssh", "--"]
 #ENTRYPOINT [ "/usr/bin/tini", "--" ]
-ENTRYPOINT [ "echo hello" ]
+ENTRYPOINT [ "/root/bin/echofile" ]
 CMD [ "/bin/bash" ]
 #CMD [ "sh", "-c", "/root/bin/nssh"]
