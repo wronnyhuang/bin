@@ -27,6 +27,8 @@ RUN pip install editdistance
 
 # permit root login via ssh
 RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
+RUN service ssh restart
+RUN echo 'root:password' | chpasswd
 
 WORKDIR "/root"
 CMD [ "/bin/bash" ]
