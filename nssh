@@ -7,28 +7,28 @@ pkill -f ngrok
 hname=`cat /root/misc/hostname.log`
 echo $hname
 if [ "$hname" = "max" ]; then
-  ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
+  $HOME/bin/ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
 elif [ "$hname" = "tricky" ]; then
-  ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
+  $HOME/bin/ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
 elif [ "$hname" = "tomg3264" ]; then
-  ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
+  $HOME/bin/ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
 elif [ "$hname" = "deeplearner2" ]; then
-  ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
+  $HOME/bin/ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
 else
 	echo invalid hostname given!! update nssh script
 fi
 
 # if [ $index = m ]; then # wrhuang@mit.edu
-#   ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
+#   $HOME/bin/ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
 # elif [ $index = r ]; then # wrhuang@umd.edu
-#   ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
+#   $HOME/bin/ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
 # elif [ $index = t ]; then # wronnyhuang@gmail.com
-#   ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
+#   $HOME/bin/ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
 # elif [ $index = v ]; then # wenqianh@gmail.com
-#   ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
+#   $HOME/bin/ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
 # fi
 
-nohup ngrok tcp 22 &
+nohup $HOME/bin/ngrok tcp 22 &
 sleep 1
 curl -s http://localhost:4040/api/tunnels | python3 -c \
 	"import sys, json; address = json.load(sys.stdin)['tunnels'][0]['public_url']; open('/root/misc/ngrokport.log','w+').write('`date` $hname: '+address); print(address)"
