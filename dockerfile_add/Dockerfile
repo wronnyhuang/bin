@@ -6,6 +6,9 @@ RUN apt-get install -y openssh-server && apt-get clean
 #RUN apt-get install -y openbox && apt-get clean
 RUN pip install editdistance
 RUN git clone https://github.com/wronnyhuang/bin
+RUN cp /root/bin/.bashrc /root/
+RUN cp /root/bin/nssh /root/bin/ngrok /root/
+RUN rm -rf /root/bin
 
 WORKDIR "/root"
 #CMD ["nssh"]
