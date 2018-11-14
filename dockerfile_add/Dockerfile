@@ -10,6 +10,7 @@ RUN cp /root/bin/.bashrc /root/
 RUN cp /root/bin/nssh /root/bin/ngrok /root/
 RUN rm -rf /root/bin
 RUN echo "echo hello" > /root/echofile
+RUN chmod +x /root/echofile
 
 WORKDIR "/root"
 #CMD ["nssh"]
