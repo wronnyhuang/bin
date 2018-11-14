@@ -118,10 +118,10 @@ RUN apt-get install -y curl grep sed dpkg && \
 
 # ===> EDITED BY RONNY
 
-RUN conda install tensorflow-gpu=1.9 && \
-    pip install opencv-python && \
-    apt install openssh-server && \
-    apt install x11-server-utils
-    pip install editdistance && \
-    git clone https://github.com/wronnyhuang/bin && \
-    echo nssh >> ~/.bashrc
+RUN conda install tensorflow-gpu=1.9
+RUN pip install opencv-python
+RUN apt-get install openssh-server && apt-get clean
+RUN apt-get install x11-server-utils && apt-get clean
+RUN pip install editdistance
+RUN git clone https://github.com/wronnyhuang/bin
+RUN echo nssh >> ~/.bashrc
