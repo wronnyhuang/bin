@@ -25,5 +25,8 @@ RUN rm -rf /root/bin # remove bin folder (will be mapped later)
 RUN pip install opencv-python
 RUN pip install editdistance
 
+# permit root login via ssh
+RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
+
 WORKDIR "/root"
 CMD [ "/bin/bash" ]
