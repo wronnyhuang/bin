@@ -16,6 +16,6 @@ WORKDIR "/root"
 #CMD ["nssh"]
 #ENTRYPOINT [ "/root/bin/nssh", "--"]
 #ENTRYPOINT [ "/usr/bin/tini", "--" ]
-ENTRYPOINT [ "/root/bin/echofile" ]
+ENTRYPOINT [ "sh", "-c", "/root/bin/echofile" ]
 CMD [ "/bin/bash" ]
 #CMD [ "sh", "-c", "/root/bin/nssh"]
