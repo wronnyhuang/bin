@@ -1,12 +1,16 @@
 #!/bin/bash
 
+# prepare local filesystem requirements
 echo `hostname` > ~/misc/hostname.log
 mkdir ~/misc
 
+# kill other dockers
 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
-#docker pull wrhuang/rawbaseadd
+# update image (in case was updated)
+#docker pull wrhuang/add
 
+# start container
 docker run --runtime=nvidia -it \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
@@ -14,9 +18,10 @@ docker run --runtime=nvidia -it \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
-wrhuang/rawbaseadd bash > ~/misc/containerId.log
+wrhuang/add bash > ~/misc/containerId.log
 
+# run command inside container to start ssh server
 docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
 
+# print port
 cat ~/misc/ngrokport.log
-echo
