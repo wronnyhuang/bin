@@ -5,7 +5,7 @@ mkdir ~/misc
 
 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
 
-docker pull wrhuang/rawbaseadd
+#docker pull wrhuang/rawbaseadd
 
 docker run --runtime=nvidia -it \
 -v ~/bin:/root/bin \
@@ -14,7 +14,7 @@ docker run --runtime=nvidia -it \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
-wrhuang/default bash > ~/misc/containerId.log
+wrhuang/rawbaseadd bash > ~/misc/containerId.log
 
 docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
 
