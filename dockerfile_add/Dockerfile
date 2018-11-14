@@ -12,7 +12,7 @@ RUN rm -rf /root/bin
 
 WORKDIR "/root"
 #CMD ["nssh"]
-ENTRYPOINT [ "/root/bin/nssh", "--"]
+#ENTRYPOINT [ "/root/bin/nssh", "--"]
 #ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD [ "/bin/bash" ]
 #CMD [ "sh", "-c", "/root/bin/nssh"]
