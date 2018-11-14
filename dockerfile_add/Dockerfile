@@ -1,4 +1,4 @@
-FROM wrhuang/base
+FROM wrhuang/rawbase
 
 RUN pip install opencv-python
 RUN apt-get install -y openssh-server && apt-get clean
