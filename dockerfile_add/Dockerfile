@@ -2,7 +2,7 @@ FROM wrhuang/rawbase
 
 RUN pip install opencv-python
 RUN apt-get install -y openssh-server && apt-get clean
-RUN apt install -y vim && apt-get clean
+RUN apt-get install -y vim && apt-get clean
 RUN pip install editdistance
 #RUN apt-get install -y xorg && apt-get clean
 #RUN apt-get install -y openbox && apt-get clean
