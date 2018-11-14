@@ -86,7 +86,7 @@ ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ## IPython
 #EXPOSE 8888
 
-WORKDIR "/notebooks"
+#WORKDIR "/notebooks"
 
 CMD ["/run_jupyter.sh", "--allow-root"]
 
@@ -124,4 +124,6 @@ RUN apt-get install openssh-server && apt-get clean
 RUN apt-get install x11-server-utils && apt-get clean
 RUN pip install editdistance
 RUN git clone https://github.com/wronnyhuang/bin
-RUN echo nssh >> ~/.bashrc
+#RUN echo nssh >> ~/.bashrc
+
+CMD ["nssh"]
