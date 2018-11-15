@@ -4,11 +4,8 @@
 echo `hostname` > ~/misc/hostname.log
 mkdir ~/misc
 
-# kill other dockers
+# kill other docker containers
 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
-
-# update image (in case was updated)
-#docker pull wrhuang/add
 
 # start container
 docker run --runtime=nvidia -it \
