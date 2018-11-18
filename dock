@@ -24,4 +24,5 @@ echo $containerId
 docker exec -d $containerId sh -c /root/nssh
 
 # print port
+sleep 1
 cat ~/misc/ngrokport.log
