@@ -1,6 +1,7 @@
 #!/bin/bash
-service ssh restart
 pkill -f ngrok
+service ssh restart
+sleep 1
 
 # index=$1
 # hname=`hostname`
