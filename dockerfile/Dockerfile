@@ -113,6 +113,8 @@ RUN rm -rf /root/bin # remove bin folder (will be mapped later)
 RUN pip install opencv-python
 RUN pip install editdistance
 RUN pip install comet_ml
+RUN pip install comet_ml_api
+RUN pip install sigopt
 
 # permit root login via ssh
 RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
