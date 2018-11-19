@@ -3,6 +3,7 @@ userhost=( ronny@tricky.cs.umd.edu ronny@tomg3264.cs.umd.edu rhuang@max.cs.umd.e
 for uh in "${userhost[@]}"
 do
 	ssh -t $uh sh -c "echo && echo && echo ===>\`hostname\` && cd \$HOME/bin && \
+	                  git reset --hard && \
 	                  git pull && \
 	                  cd dockerfile && \
 	                  docker build -t wrhuang/add . && \
