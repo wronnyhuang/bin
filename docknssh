@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# run command inside container to start ssh server
+containerId=`cat ~/misc/containerId.log`
+echo $containerId
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
+
+# print port
+sleep 5
+cat ~/misc/ngrokport.log
