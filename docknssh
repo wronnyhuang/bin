@@ -6,5 +6,5 @@ echo $containerId
 docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
 
 # print port
-sleep 5
+sleep 2
 cat ~/misc/ngrokport.log

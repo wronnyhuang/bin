@@ -17,5 +17,6 @@ docker run --runtime=nvidia -it \
 -d \
 wrhuang/add bash > ~/misc/containerId.log
 
-sleep 60
+sleep 5
+docknssh
 docknssh
