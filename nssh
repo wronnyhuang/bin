@@ -1,5 +1,4 @@
 #!/bin/bash
-service ssh restart
 pkill -f ngrok
 sleep 1
 
@@ -19,6 +18,7 @@ else
 	echo invalid hostname given!! update nssh script
 fi
 
+service ssh restart
 nohup /root/ngrok tcp 22 &
 sleep 1
 curl -s http://localhost:4040/api/tunnels | python3 -c \
