@@ -17,6 +17,11 @@ docker run --runtime=nvidia -it \
 -d \
 wrhuang/add bash > ~/misc/containerId.log
 
-sleep 5
-docknssh
-docknssh
+sleep 2
+# run command inside container to start ssh server
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
+
+# print port
+sleep 4
+cat ~/misc/ngrokport.log
