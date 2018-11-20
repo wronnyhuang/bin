@@ -15,6 +15,7 @@ docker run --runtime=nvidia -it \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
+--name dont_kill_this_thanks \
 wrhuang/default bash > ~/misc/containerId.log
 
 #sleep 2
