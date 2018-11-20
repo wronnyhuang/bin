@@ -15,7 +15,7 @@ docker run --runtime=nvidia -it \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
-wrhuang/add bash > ~/misc/containerId.log
+wrhuang/default bash > ~/misc/containerId.log
 
 #sleep 2
 # run command inside container to start ssh server
