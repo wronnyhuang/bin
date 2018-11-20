@@ -5,7 +5,7 @@ echo `hostname` > ~/misc/hostname.log
 mkdir ~/misc
 
 # kill other docker containers
-docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+docker stop $(docker ps -aq -f "name=dont_kill_thanks") && docker rm $(docker ps -aq -f "name=dont_kill_thanks")
 
 # start container
 docker run --runtime=nvidia -it \
@@ -15,7 +15,7 @@ docker run --runtime=nvidia -it \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
---name dont_kill_this_thanks \
+--name dont_kill_thanks \
 wrhuang/default bash > ~/misc/containerId.log
 
 #sleep 2
