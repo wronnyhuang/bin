@@ -103,4 +103,4 @@ conda activate base
 # setup path and terminal colors
 export PATH=/root/bin:$PATH
 LS_COLORS=$LS_COLORS:'di=1;31:ln=34' ; export LS_COLORS;
-echo Welcome to wrhuang/default docker container
+echo Welcome to wrhuang/default docker container - `cat ~/misc/hostname.log`
