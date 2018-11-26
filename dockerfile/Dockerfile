@@ -108,7 +108,7 @@ RUN pip install sigopt
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
 RUN git clone https://github.com/wronnyhuang/bin /root/bin # clone my bin folder for useful scripts
-RUN cp /root/bin/.bashrc /root/ # replace bashrc file to have colors
+RUN cp /root/bin/.bashrc /root/ # replace bashrc file to have colors and print welcome message
 RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/ # copy vimrc and inputrc configs into home
 
 # install vim plugins
