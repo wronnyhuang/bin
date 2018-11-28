@@ -110,23 +110,23 @@ RUN pip install cometml_api
 RUN pip install sigopt
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
-RUN git clone https://github.com/wronnyhuang/bin /root/bin # clone my bin folder for useful scripts
-RUN cp /root/bin/.bashrc /root/ # replace bashrc file to have colors and print welcome message
-RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/ # copy vimrc and inputrc configs into home
+RUN git clone https://github.com/wronnyhuang/bin /root/bin
+RUN cp /root/bin/.bashrc /root/
+RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
 
 # install vim plugins
 RUN sh /root/bin/install_vundle.sh
 RUN sh /root/bin/install_commentary_instructions.sh
 
 # setup scripts for ssh tunneling, aka copy ngrok and nssh into home
-RUN cp /root/bin/nssh /root/bin/ngrok /root/ # permanently store ssh tunneling setup scripts in the image
+RUN cp /root/bin/nssh /root/bin/ngrok /root/
 
 # setup dropbox uploader
 RUN echo as1rfaem15QAAAAAAABK5bbRELhSf4rZaOEJuss5rFKscFtYvPvtMbvVNLFC9G2O > token.txt
-RUN sh /root/bin/dbx
+RUN sh /root/bin/dropbox_uploader.sh
 
 # remove bin folder
-RUN rm -rf /root/bin # remove bin folder (will be mapped later)
+RUN rm -rf /root/bin
 
 WORKDIR "/root"
 CMD [ "/bin/bash" ]
