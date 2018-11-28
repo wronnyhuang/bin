@@ -100,7 +100,7 @@ RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
 # ===> Force rebuild beyond this point (dont cache)
-ARG CACHEBUST=1 # pass this as argument to build command
+ARG CACHEBUST=1
 
 # useful python packages
 RUN pip install opencv-python
