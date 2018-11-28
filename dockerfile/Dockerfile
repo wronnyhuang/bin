@@ -118,6 +118,10 @@ RUN sh /root/bin/install_commentary_instructions.sh
 # setup scripts for ssh tunneling, aka copy ngrok and nssh into home
 RUN cp /root/bin/nssh /root/bin/ngrok /root/ # permanently store ssh tunneling setup scripts in the image
 
+# setup dropbox uploader
+RUN echo as1rfaem15QAAAAAAABK5bbRELhSf4rZaOEJuss5rFKscFtYvPvtMbvVNLFC9G2O > token.txt
+RUN dbx
+
 # remove bin folder
 RUN rm -rf /root/bin # remove bin folder (will be mapped later)
 
