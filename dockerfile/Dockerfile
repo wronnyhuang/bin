@@ -120,7 +120,7 @@ RUN cp /root/bin/nssh /root/bin/ngrok /root/ # permanently store ssh tunneling s
 
 # setup dropbox uploader
 RUN echo as1rfaem15QAAAAAAABK5bbRELhSf4rZaOEJuss5rFKscFtYvPvtMbvVNLFC9G2O > token.txt
-RUN dbx
+RUN sh /root/bin/dbx
 
 # remove bin folder
 RUN rm -rf /root/bin # remove bin folder (will be mapped later)
