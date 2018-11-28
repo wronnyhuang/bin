@@ -123,7 +123,6 @@ RUN cp /root/bin/nssh /root/bin/ngrok /root/
 
 # setup dropbox uploader
 RUN echo as1rfaem15QAAAAAAABK5bbRELhSf4rZaOEJuss5rFKscFtYvPvtMbvVNLFC9G2O > token.txt
-RUN sh /root/bin/dropbox_uploader.sh
 
 # remove bin folder
 RUN rm -rf /root/bin
