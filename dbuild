@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-cd /root/bin/dockerfile
+cd ~/bin/dockerfile
 docker build --build-arg CACHEBUST=$(date +%s) -t wrhuang/default .
 cd -
