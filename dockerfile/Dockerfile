@@ -99,6 +99,10 @@ RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
+# install pytorch
+RUN conda update -n base conda
+RUN conda install pytorch torchvision -c pytorch
+
 # ===> Force rebuild beyond this point (dont cache)
 ARG CACHEBUST=1
 
