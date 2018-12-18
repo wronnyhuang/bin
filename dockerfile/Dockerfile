@@ -112,6 +112,7 @@ RUN pip install editdistance
 RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
+RUN pip install tensorboardX
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
 RUN git clone https://github.com/wronnyhuang/bin /root/bin
