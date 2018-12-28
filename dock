@@ -15,6 +15,7 @@ docker run --runtime=nvidia -it \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
+--shm-size 56G \
 --name dont_kill_thanks \
 wrhuang/default bash > ~/misc/containerId.log
 
