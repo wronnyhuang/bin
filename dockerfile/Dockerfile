@@ -104,7 +104,9 @@ RUN conda update -n base conda
 RUN conda install pytorch torchvision -c pytorch
 
 # ===> Force rebuild beyond this point (dont cache)
-ARG CACHEBUST=1
+# Run this command when building
+# docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
+ARG CACHEBUST=2
 
 # useful python packages
 RUN pip install opencv-python
