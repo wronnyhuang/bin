@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# prepare local filesystem requirements
+echo `hostname` > ~/misc/hostname.log
+mkdir ~/misc
+
+# kill other docker containers
+docker stop $(docker ps -aq -f "name=dont_kill_thanks") && docker rm $(docker ps -aq -f "name=dont_kill_thanks")
+
+# start container
+docker run -it \
+-v ~/bin:/root/bin \
+-v ~/ckpt:/root/ckpt \
+-v ~/datasets:/root/datasets \
+-v ~/repo:/root/repo \
+-v ~/misc:/root/misc \
+-d \
+--shm-size 56G \
+--name dont_kill_thanks \
+wrhuang/default bash > ~/misc/containerId.log
+
+#sleep 2
+# run command inside container to start ssh server
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
+
+# print port
+sleep 4
+cat ~/misc/ngrokport.log
