@@ -5,8 +5,7 @@ do
 	ssh -t $uh sh -c "echo && echo && echo ===>\`hostname\` && cd \$HOME/bin && \
 	                  git reset --hard && \
 	                  git pull && \
-	                  cd dockerfile && \
-	                  docker build -t wrhuang/default . && \
+	                  docker pull wrhuang/default && \
 	                  . \$HOME/bin/dock"
 done
 echo === nports ===
