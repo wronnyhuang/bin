@@ -106,7 +106,7 @@ RUN conda install pytorch torchvision -c pytorch
 # ===> Force rebuild beyond this point (dont cache)
 # Run this command when building or just change the value here
 # docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
-ARG CACHEBUST=2
+ARG CACHEBUST=3
 
 # useful python packages
 RUN pip install opencv-python
@@ -115,6 +115,7 @@ RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
 RUN pip install tensorboardX
+RUN pip install tensorflow-hub
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
 RUN git clone https://github.com/wronnyhuang/bin /root/bin
