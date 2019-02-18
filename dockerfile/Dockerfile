@@ -116,6 +116,7 @@ RUN pip install cometml_api
 RUN pip install sigopt
 RUN pip install tensorboardX
 RUN pip install tensorflow-hub
+RUN pip install joblib
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
 RUN git clone https://github.com/wronnyhuang/bin /root/bin
