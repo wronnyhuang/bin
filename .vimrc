@@ -60,8 +60,8 @@ Plugin 'tpope/vim-commentary'
 :noremap t .
 :noremap ] ;
 :noremap [ ,
-:noremap ; 5j
-:noremap ' 5k
+:noremap ; 5k
+:noremap ' 5j
 :noremap H ^
 :noremap L $
 :noremap Y y$
