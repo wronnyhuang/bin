@@ -16,7 +16,7 @@ docker run --runtime=nvidia -it \
 -v ~/misc:/root/misc \
 -d \
 --shm-size 56G \
---name dont_kill_thanks \
+--name dont_kill_guest \
 wrhuang/default bash > ~/misc/containerId.log
 
 #sleep 2
