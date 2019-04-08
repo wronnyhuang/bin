@@ -2,7 +2,8 @@
 
 FROM nvidia/cuda:9.0-base-ubuntu16.04
 
-LABEL maintainer="Craig Citro <craigcitro@google.com>"
+LABEL maintainer="W Ronny Huang <wronnyhuang@gmail.com>"
+ARG CACHEBUST=7
 
 # Pick up some TF dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -83,8 +84,7 @@ RUN apt-get install -y curl grep sed dpkg && \
     apt-get clean
 
 # ===> install conda tensorflow-gpu, takes a long time
-
-RUN conda install tensorflow-gpu=1.9
+RUN conda install tensorflow-gpu
 
 # ===> Ronny's custom commands
 
@@ -129,7 +129,7 @@ RUN sh /root/bin/install_vundle.sh
 RUN sh /root/bin/install_commentary_instructions.sh
 
 # setup scripts for ssh tunneling, aka copy ngrok and nssh into home
-RUN cp /root/bin/nssh /root/bin/ngrok /root/
+RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
 
 # remove bin folder
 RUN rm -rf /root/bin
