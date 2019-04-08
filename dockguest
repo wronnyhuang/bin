@@ -12,6 +12,7 @@ docker run --runtime=nvidia -it \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
 -v ~/datasets:/root/datasets \
+-v ~/guest:/root/guest \
 -v ~/misc:/root/misc \
 -d \
 --shm-size 56G \
