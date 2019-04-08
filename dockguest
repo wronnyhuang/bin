@@ -5,7 +5,7 @@ echo `hostname` > ~/misc/hostname.log
 mkdir ~/misc
 
 # kill other docker containers
-docker stop $(docker ps -aq -f "name=dont_kill_thanks") && docker rm $(docker ps -aq -f "name=dont_kill_thanks")
+docker stop $(docker ps -aq -f "name=dont_kill_guest") && docker rm $(docker ps -aq -f "name=dont_kill_guest")
 
 # start container
 docker run --runtime=nvidia -it \
