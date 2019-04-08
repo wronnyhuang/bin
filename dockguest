@@ -12,7 +12,6 @@ docker run --runtime=nvidia -it \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
 -v ~/datasets:/root/datasets \
--v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
 -d \
 --shm-size 56G \
@@ -21,8 +20,8 @@ wrhuang/default bash > ~/misc/containerId.log
 
 #sleep 2
 # run command inside container to start ssh server
-docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
-docker exec -d `cat ~/misc/containerId.log` sh -c /root/nssh
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nsshguest
+docker exec -d `cat ~/misc/containerId.log` sh -c /root/nsshguest
 
 # print port
 sleep 4
