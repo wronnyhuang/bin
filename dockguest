@@ -26,4 +26,4 @@ docker exec -d `cat ~/misc/containerIdGuest.log` sh -c /root/nsshguest
 
 # print port
 sleep 4
-cat ~/misc/ngrokport.log
+cat ~/misc/ngrokport_guest.log
