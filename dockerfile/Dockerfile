@@ -3,7 +3,7 @@
 FROM nvidia/cuda:9.0-base-ubuntu16.04
 
 LABEL maintainer="W Ronny Huang <wronnyhuang@gmail.com>"
-ARG CACHEBUST=7
+ARG CACHEBUST=9
 
 # Pick up some TF dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
