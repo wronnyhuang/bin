@@ -99,6 +99,11 @@ RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
+# install bigfloat
+RUN apt-get install libgmp3-dev
+RUN apt-get install libmpfr-dev libmpfr-doc libmpfr4 libmpfr4-dbg
+RUN pip install bigfloat
+
 # install pytorch
 RUN conda update -n base conda
 RUN conda install pytorch torchvision -c pytorch
