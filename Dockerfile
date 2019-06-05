@@ -69,61 +69,61 @@ RUN apt-get install -y curl grep sed dpkg && \
     apt-get clean
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 
-# ===> install conda tensorflow-gpu, takes a long time
-RUN conda update -n base conda
-RUN conda install tensorflow-gpu
-
-# ===> install conda pytorch
-RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
-
-# ===> Ronny's custom commands
-
-# apt-get packages
-RUN apt-get install -y openssh-server && apt-get clean
-RUN apt-get install -y vim && apt-get clean
-#RUN apt-get install -y xorg && apt-get clean
-#RUN apt-get install -y openbox && apt-get clean
-
-# permit root login via ssh
-RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
-RUN service ssh restart
-RUN echo 'root:password' | chpasswd
-
-## install bigfloat [not needed anymore]
-#RUN apt-get install libgmp3-dev
-#RUN apt-get install libmpfr-dev libmpfr-doc libmpfr4 libmpfr4-dbg
-#RUN pip install bigfloat
-
-# ===> Force rebuild beyond this point (dont cache)
-# Run this command when building or just change the value here
-# docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
-#ARG CACHEBUST=6
-
-# useful python packages
-RUN pip install opencv-python
-RUN pip install editdistance
-RUN pip install comet_ml
-RUN pip install cometml_api
-RUN pip install sigopt
-RUN pip install tensorflow-hub
-RUN pip install tensorflow-probability
-RUN pip install joblib
-
-# pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
-RUN git clone https://github.com/wronnyhuang/bin /root/bin
-RUN cp /root/bin/.bashrc /root/
-RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
-
-# install vim plugins
-RUN sh /root/bin/install_vundle.sh
-RUN sh /root/bin/install_commentary_instructions.sh
-
-# setup scripts for ssh tunneling, aka copy ngrok and nssh into home
-RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
-
-# remove bin folder
-RUN rm -rf /root/bin
-
-WORKDIR "/root"
-CMD [ "/bin/bash" ]
+## ===> install conda tensorflow-gpu, takes a long time
+#RUN conda update -n base conda
+#RUN conda install tensorflow-gpu
+#
+## ===> install conda pytorch
+#RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+#
+## ===> Ronny's custom commands
+#
+## apt-get packages
+#RUN apt-get install -y openssh-server && apt-get clean
+#RUN apt-get install -y vim && apt-get clean
+##RUN apt-get install -y xorg && apt-get clean
+##RUN apt-get install -y openbox && apt-get clean
+#
+## permit root login via ssh
+#RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
+#RUN service ssh restart
+#RUN echo 'root:password' | chpasswd
+#
+### install bigfloat [not needed anymore]
+##RUN apt-get install libgmp3-dev
+##RUN apt-get install libmpfr-dev libmpfr-doc libmpfr4 libmpfr4-dbg
+##RUN pip install bigfloat
+#
+## ===> Force rebuild beyond this point (dont cache)
+## Run this command when building or just change the value here
+## docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
+##ARG CACHEBUST=6
+#
+## useful python packages
+#RUN pip install opencv-python
+#RUN pip install editdistance
+#RUN pip install comet_ml
+#RUN pip install cometml_api
+#RUN pip install sigopt
+#RUN pip install tensorflow-hub
+#RUN pip install tensorflow-probability
+#RUN pip install joblib
+#
+## pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
+#RUN git clone https://github.com/wronnyhuang/bin /root/bin
+#RUN cp /root/bin/.bashrc /root/
+#RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
+#
+## install vim plugins
+#RUN sh /root/bin/install_vundle.sh
+#RUN sh /root/bin/install_commentary_instructions.sh
+#
+## setup scripts for ssh tunneling, aka copy ngrok and nssh into home
+#RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
+#
+## remove bin folder
+#RUN rm -rf /root/bin
+#
+#WORKDIR "/root"
+#CMD [ "/bin/bash" ]
 
