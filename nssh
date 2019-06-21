@@ -18,7 +18,6 @@ elif [ "$hname" = "Thor" ]; then
   $HOME/ngrok authtoken 2Q2XgsYinA3PmS4VAj7KH_2f2A3qkgUrpTstYMh2Xkx
 elif [ "$hname" = "AZEAMCDSVM01" ]; then
   $HOME/ngrok authtoken 6paKxohVicu426H6S55Yg_6ztLre3BSMRvs5teJQydt
-  echo in_mc
 else
 	echo invalid hostname given. should be one of ronnys servers. update nssh script to include iftheres a new server
 fi

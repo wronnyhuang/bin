@@ -11,8 +11,12 @@ elif [ $userhost = "v" ]; then
 	ssh_with_options.sh ronny dsvm6usdum456zy76.eastus.cloudapp.azure.com $input
 elif [ $userhost = "u" ]; then
 	ssh_with_options.sh ronny 10.143.32.252 $input
-elif [ $userhost = "d" ]; then
+elif [ $userhost = "e" ]; then
 	ssh_with_options.sh deeplearner 10.55.64.8 $input
+elif [ $userhost = "d" ]; then
+	ssh mcdip@10.246.65.72
+    ssh mcdip@172.16.174.4
+    su ronny
 elif [ $userhost = "n" ]; then
 	ssh_with_options.sh root "0.tcp.ngrok.io -p 19154" $input
 else
