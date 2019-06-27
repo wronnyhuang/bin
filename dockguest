@@ -10,7 +10,6 @@ docker stop $(docker ps -aq -f "name=guestdontkill") && docker rm $(docker ps -a
 # start container
 docker run --runtime=nvidia -it \
 -v ~/bin:/root/bin \
--v ~/datasets:/root/datasets \
 -v ~/guest:/root/guest \
 -v ~/misc:/root/misc \
 -d \
@@ -20,8 +19,8 @@ wrhuang/default bash > ~/misc/containerIdGuest.log
 
 #sleep 2
 # run command inside container to start ssh server
-docker exec -d `cat ~/misc/containerIdGuest.log` sh -c /root/nsshguest
-docker exec -d `cat ~/misc/containerIdGuest.log` sh -c /root/nsshguest
+docker exec -d `cat ~/misc/containerIdGuest.log` sh -c /root/bin/nsshguest
+docker exec -d `cat ~/misc/containerIdGuest.log` sh -c /root/bin/nsshguest
 
 # print port
 sleep 4
