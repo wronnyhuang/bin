@@ -19,7 +19,7 @@ echo $hname
 #else
 #	echo invalid hostname given. should be one of ronnys servers. update nssh script to include iftheres a new server
 #fi
-$HOME/ngrok authtoken 2Q2XgsYinA3PmS4VAj7KH_2f2A3qkgUrpTstYMh2Xkx
+$HOME/ngrok authtoken 4R3JtqReY9LYEFUS9SoBW_3L8hFh4mNw4EhavSr2kTU
 
 service ssh restart
 nohup /root/ngrok tcp 22 &
