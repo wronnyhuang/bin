@@ -16,6 +16,8 @@ elif [ $userhost = "e" ]; then
 elif [ $userhost = "d" ]; then
 	ssh mcdip@10.246.65.72
 	# follow this up with ssh mcdip@172.16.174.4 and su ronny
+elif [ $userhost = "x" ]; then
+	ssh hronny@10.143.86.53
 elif [ $userhost = "n" ]; then
 	ssh_with_options.sh root "0.tcp.ngrok.io -p 19154" $input
 else
