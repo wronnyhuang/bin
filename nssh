@@ -4,7 +4,7 @@ sleep 1
 
 # index=$1
 # hname=`hostname`
-hname=`cat /root/misc/hostname.log`
+hname=`cat `$HOME`/misc/hostname.log`
 echo $hname
 if [ "$hname" = "max" ]; then
   $HOME/ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
