@@ -15,8 +15,7 @@ elif [ "$hname" = "tomg3264" ]; then
 elif [ "$hname" = "deeplearner2" ]; then
   $HOME/ngrok authtoken 6qrCQcwWbKiUo94JMUkKs_26cSZzqzgkREzx8y7cmUU
 elif [ "$hname" = "ussecrauglaapp1" ]; then
-#  $HOME/ngrok authtoken 2Q2XgsYinA3PmS4VAj7KH_2f2A3qkgUrpTstYMh2Xkx
-  $HOME/ngrok authtoken 6paKxohVicu426H6S55Yg_6ztLre3BSMRvs5teJQydt
+  $HOME/ngrok authtoken 2CgR2YqrwmhuLi7grboaf_5irhBwKBhQib16zhtN9xb
 elif [ "$hname" = "AZEAMCDSVM01" ]; then
   $HOME/ngrok authtoken 6paKxohVicu426H6S55Yg_6ztLre3BSMRvs5teJQydt
 elif [ "$hname" = "nsshguest" ]; then
