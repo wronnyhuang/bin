@@ -127,3 +127,8 @@ ENTRYPOINT [ "/usr/bin/tini", "--" ]
 #WORKDIR "/root"
 #CMD [ "/bin/bash" ]
 
+
+
+# cache github passwords so dont need to login everytime
+RUN git config --global credential.helper cache
+RUN apt install screen

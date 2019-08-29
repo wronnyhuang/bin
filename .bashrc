@@ -100,6 +100,14 @@ fi
 . /opt/conda/etc/profile.d/conda.sh
 conda activate base
 
+# locale update
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
+# screen autocomplete
+complete -C "perl -e '@w=split(/ /,\$ENV{COMP_LINE},-1);\$w=pop(@w);for(qx(screen -ls)){print qq/\$1\n/ if (/^\s*\$w/&&/(\d+\.\w+)/||/\d+\.(\$w\w*)/)}'" screen
+
 # setup path and terminal colors
 export PATH=/root/bin:$PATH
 LS_COLORS=$LS_COLORS:'di=1;31:ln=34' ; export LS_COLORS;
