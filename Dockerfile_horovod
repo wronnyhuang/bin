@@ -1,4 +1,5 @@
 FROM nvidia/cuda:10.0-devel-ubuntu18.04
+LABEL maintainer="W Ronny Huang <wronnyhuang@gmail.com>"
 
 # TensorFlow version is tightly coupled to CUDA and cuDNN so it should be selected carefully
 ENV TENSORFLOW_VERSION=1.14.0
@@ -30,6 +31,24 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
         librdmacm1 \
         libibverbs1 \
         ibverbs-providers
+
+# Pick up some TF dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        cuda-command-line-tools-${CUDA/./-} \
+        cuda-cublas-${CUDA/./-} \
+        cuda-cufft-${CUDA/./-} \
+        cuda-curand-${CUDA/./-} \
+        cuda-cusolver-${CUDA/./-} \
+        cuda-cusparse-${CUDA/./-} \
+        libfreetype6-dev \
+        libhdf5-serial-dev \
+        libzmq3-dev \
+        pkg-config \
+        software-properties-common \
+
+# For CUDA profiling, TensorFlow requires CUPTI.
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 # ===> ANACONDA3 DOCKERFILE
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
