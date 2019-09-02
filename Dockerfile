@@ -47,12 +47,11 @@ ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 # ===> ANACONDA3 DOCKERFILE
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 
 RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 \
-    git mercurial subversion
+    libglib2.0-0 libxext6 libsm6 libxrender1
 
 RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
@@ -132,3 +131,4 @@ ENTRYPOINT [ "/usr/bin/tini", "--" ]
 # cache github passwords so dont need to login everytime
 RUN git config --global credential.helper cache
 RUN apt install screen
+RUN apt-get install htop
