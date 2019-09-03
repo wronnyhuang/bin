@@ -1,3 +1,4 @@
+#==> HOROVOD OFFICIAL DOCKERFILE
 FROM nvidia/cuda:10.0-devel-ubuntu18.04
 
 # TensorFlow version is tightly coupled to CUDA and cuDNN so it should be selected carefully
@@ -43,7 +44,7 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
     rm get-pip.py
 
-# Install TensorFlow, Keras, PyTorch and MXNet
+# Install TensorFlow, Keras, PyTorch
 RUN pip install future typing
 RUN pip install numpy \
         tensorflow-gpu==${TENSORFLOW_VERSION} \
@@ -79,10 +80,14 @@ RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_confi
     echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
+# ==> RONNY CUSTOM
 # permit root login via ssh
 RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 RUN service ssh restart
 RUN echo 'root:password' | chpasswd
+
+# useful apt packages
+apt install screen
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
 RUN git clone https://github.com/wronnyhuang/bin /root/bin
@@ -99,7 +104,9 @@ RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
 # remove bin folder
 RUN rm -rf /root/bin
 
-# useful python packages
+# ==> USEFUL PYTHON PACKAGES
+RUN python -m pip install -U pip && \
+    python -m pip install -U matplotlib
 RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
