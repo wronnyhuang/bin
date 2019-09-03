@@ -3,8 +3,12 @@
 FROM nvidia/cuda:10.0-base-ubuntu18.04
 LABEL maintainer="W Ronny Huang <wronnyhuang@gmail.com>"
 ARG CUDA=10.0
-ARG CUDNN=7.6.2.24-1
 ENV NCCL_VERSION=2.4.7-1+cuda10.0
+# tensorflow's version
+ARG CUDNN=7.6.2.24-1
+# horovod's version
+ARG CUDNN=7.6.0.64-1
+
 
 # Set default shell to /bin/bash
 SHELL ["/bin/bash", "-cu"]
