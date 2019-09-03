@@ -97,8 +97,7 @@ RUN echo 'root:password' | chpasswd
 
 # install pytorch
 RUN conda update -n base conda
-#RUN conda install pytorch torchvision -c pytorch
-RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+RUN conda install pytorch torchvision -c pytorch
 
 # ===> Force rebuild beyond this point (dont cache)
 # Run this command when building or just change the value here
