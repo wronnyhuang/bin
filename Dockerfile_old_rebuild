@@ -6,6 +6,9 @@ ARG CUDA=10.0
 ARG CUDNN=7.6.2.24-1
 ENV NCCL_VERSION=2.4.7-1+cuda10.0
 
+# Set default shell to /bin/bash
+SHELL ["/bin/bash", "-cu"]
+
 # Pick up some TF dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
