@@ -81,6 +81,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias smi='nvidia-smi'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -97,8 +98,8 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
-. /opt/conda/etc/profile.d/conda.sh
-conda activate base
+#. /opt/conda/etc/profile.d/conda.sh
+#conda activate base
 
 # locale update
 export LC_ALL="en_US.UTF-8"

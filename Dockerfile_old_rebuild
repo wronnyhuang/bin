@@ -100,13 +100,12 @@ RUN apt-get install -y xorg && apt-get clean
 #ARG CACHEBUST=6
 
 # useful python packages
-#RUN pip install opencv-python
-#RUN pip install editdistance
 #RUN pip install comet_ml
 #RUN pip install cometml_api
 #RUN pip install sigopt
-#RUN pip install tensorboardX
 #RUN pip install tensorflow-hub
+#RUN pip install opencv-python
+#RUN pip install editdistance
 #RUN pip install tensorflow-probability
 #RUN pip install joblib
 
