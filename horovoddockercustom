@@ -81,6 +81,11 @@ RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_confi
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # ==> RONNY CUSTOM
+## Force rebuild beyond this point (dont cache)
+## Run this command when building or just change the value here
+## docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
+ARG CACHEBUST=1
+
 # install vim plugins
 RUN sh /root/bin/install_vundle.sh
 RUN sh /root/bin/install_commentary_instructions.sh
