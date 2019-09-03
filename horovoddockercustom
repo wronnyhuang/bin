@@ -81,6 +81,10 @@ RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_confi
     mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # ==> RONNY CUSTOM
+# install vim plugins
+RUN sh /root/bin/install_vundle.sh
+RUN sh /root/bin/install_commentary_instructions.sh
+
 # permit root login via ssh
 RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
 RUN service ssh restart
@@ -97,10 +101,6 @@ RUN git clone https://github.com/wronnyhuang/bin /root/bin
 RUN cp /root/bin/.bashrc /root/
 RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
 
-# install vim plugins
-RUN sh /root/bin/install_vundle.sh
-RUN sh /root/bin/install_commentary_instructions.sh
-
 # setup scripts for ssh tunneling, aka copy ngrok and nssh into home
 RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
 
@@ -116,3 +116,6 @@ RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
 RUN pip install tensorflow-hub
+
+WORKDIR "/root"
+CMD [ "/bin/bash" ]
