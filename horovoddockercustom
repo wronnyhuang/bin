@@ -105,12 +105,12 @@ RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
 # setup scripts for ssh tunneling, aka copy ngrok and nssh into home
 RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
 
-# remove bin folder
-RUN rm -rf /root/bin
-
 # install vim plugins
 RUN sh /root/bin/install_vundle.sh
 RUN sh /root/bin/install_commentary_instructions.sh
+
+# remove bin folder
+RUN rm -rf /root/bin
 
 # ==> USEFUL PYTHON PACKAGES
 RUN python -m pip install -U pip && \
