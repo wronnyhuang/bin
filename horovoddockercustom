@@ -87,7 +87,10 @@ RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
 # useful apt packages
-apt install screen
+RUN apt install screen
+RUN apt-get install htop
+# cache github passwords so dont need to login everytime
+RUN git config --global credential.helper cache
 
 # pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
 RUN git clone https://github.com/wronnyhuang/bin /root/bin
@@ -107,6 +110,8 @@ RUN rm -rf /root/bin
 # ==> USEFUL PYTHON PACKAGES
 RUN python -m pip install -U pip && \
     python -m pip install -U matplotlib
+RUN pip install -U scikit-learn
+RUN pip install pandas
 RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
