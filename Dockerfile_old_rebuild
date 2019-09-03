@@ -14,40 +14,39 @@ ARG CUDNN=7.6.0.64-1
 SHELL ["/bin/bash", "-cu"]
 
 # Pick up some TF dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    cuda-command-line-tools-${CUDA/./-} \
-    cuda-cublas-${CUDA/./-} \
-    cuda-cufft-${CUDA/./-} \
-    cuda-curand-${CUDA/./-} \
-    cuda-cusolver-${CUDA/./-} \
-    cuda-cusparse-${CUDA/./-} \
-    curl \
-    libfreetype6-dev \
-    libhdf5-serial-dev \
-    libzmq3-dev \
-    pkg-config \
-    software-properties-common \
-    unzip \
-    cmake \
-    g++-4.8 \
-    git \
-    curl \
-    vim \
-    wget \
-    ca-certificates \
-    libcudnn7=${CUDNN}+cuda${CUDA} \
-    libnccl2=${NCCL_VERSION} \
-    libnccl-dev=${NCCL_VERSION} \
-    libjpeg-dev \
-    libpng-dev \
-    librdmacm1 \
-    libibverbs1 \
-    ibverbs-providers \
-    && \
-    apt-get clean
+RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
+        build-essential \
+        cuda-command-line-tools-${CUDA/./-} \
+        cuda-cublas-${CUDA/./-} \
+        cuda-cufft-${CUDA/./-} \
+        cuda-curand-${CUDA/./-} \
+        cuda-cusolver-${CUDA/./-} \
+        cuda-cusparse-${CUDA/./-} \
+        curl \
+        libfreetype6-dev \
+        libhdf5-serial-dev \
+        libzmq3-dev \
+        pkg-config \
+        software-properties-common \
+        unzip \
+        cmake \
+        g++-4.8 \
+        git \
+        curl \
+        vim \
+        wget \
+        ca-certificates \
+        libcudnn7=${CUDNN}+cuda${CUDA} \
+        libnccl2=${NCCL_VERSION} \
+        libnccl-dev=${NCCL_VERSION} \
+        libjpeg-dev \
+        libpng-dev \
+        librdmacm1 \
+        libibverbs1 \
+        ibverbs-providers
 
-RUN apt-get update && \
+RUN apt-get clean && \
+    apt-get update && \
     apt-get install -y --no-install-recommends libnvinfer5=5.1.5-1+cuda${CUDA} && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
