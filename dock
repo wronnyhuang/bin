@@ -18,7 +18,7 @@ docker run --runtime=nvidia -it \
 -d \
 --shm-size 56G \
 --name horovodcustom \
-wrhuang/default bash > ~/misc/containerId.log
+wrhuang/default:horovodcustom bash > ~/misc/containerId.log
 
 #sleep 2
 # run command inside container to start ssh server
