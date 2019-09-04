@@ -8,8 +8,10 @@ hname=`cat $HOME/misc/hostname.log`
 echo $hname
 if [ "$hname" = "max" ]; then
   $HOME/ngrok authtoken 5S28rBKgc22ZW7evyedNT_YvEm15RZSHdXgS4QwYbk
+#elif [ "$hname" = "tricky" ]; then
+#  $HOME/ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
 elif [ "$hname" = "tricky" ]; then
-  $HOME/ngrok authtoken 46BUGD4XhUPTaHq7XJBwv_7e1PZUn5Qm6Z2735i64UN
+  $HOME/ngrok authtoken 1QLo4uLt3fFOKbLeSmVKmYEWqXH_DpcKFAaA79MnQdsNKTy9
 elif [ "$hname" = "tomg3264" ]; then
   $HOME/ngrok authtoken 81CyUW18RB5tJ1RWi67MY_7onRym1VRC82KWB9pqTLs
 elif [ "$hname" = "deeplearner2" ]; then

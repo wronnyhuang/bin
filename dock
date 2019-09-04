@@ -5,10 +5,11 @@ echo `hostname` > ~/misc/hostname.log
 mkdir ~/misc
 
 # kill other docker containers
-docker stop $(docker ps -aq -f "name=dont_kill_thanks") && docker rm $(docker ps -aq -f "name=dont_kill_thanks")
+docker stop $(docker ps -aq -f "name=horovodcustom") && docker rm $(docker ps -aq -f "name=horovodcustom")
 
 # start container
 docker run --runtime=nvidia -it \
+--privileged \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
 -v ~/datasets:/root/datasets \
@@ -16,7 +17,7 @@ docker run --runtime=nvidia -it \
 -v ~/misc:/root/misc \
 -d \
 --shm-size 56G \
---name dont_kill_thanks \
+--name horovodcustom \
 wrhuang/default bash > ~/misc/containerId.log
 
 #sleep 2
