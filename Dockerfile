@@ -1,134 +1,130 @@
-# ===> TENSORFLOW DOCKERFILE (using only for dependencies with gpu)
+# To build this, run the following command
+# build -f Dockerfile -t wrhuang/default:dev .
 
-ARG UBUNTU_VERSION=16.04
+#==> HOROVOD OFFICIAL DOCKERFILE with mxnet and examples removed
+FROM nvidia/cuda:10.0-devel-ubuntu18.04
 
-ARG ARCH=
-ARG CUDA=10.0
-FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}-base-ubuntu${UBUNTU_VERSION} as base
-# ARCH and CUDA are specified again because the FROM directive resets ARGs
-# (but their default value is retained if set previously)
-ARG ARCH
-ARG CUDA
-ARG CUDNN=7.4.1.5-1
+# TensorFlow version is tightly coupled to CUDA and cuDNN so it should be selected carefully
+ENV TENSORFLOW_VERSION=1.14.0
+ENV PYTORCH_VERSION=1.2.0
+ENV TORCHVISION_VERSION=0.4.0
+ENV CUDNN_VERSION=7.6.0.64-1+cuda10.0
+ENV NCCL_VERSION=2.4.7-1+cuda10.0
 
-# Needed for string substitution
-SHELL ["/bin/bash", "-c"]
+# Python 2.7 or 3.6 is supported by Ubuntu Bionic out of the box
+ARG python=3.6
+ENV PYTHON_VERSION=${python}
 
-LABEL maintainer="W Ronny Huang <wronnyhuang@gmail.com>"
+# Set default shell to /bin/bash
+SHELL ["/bin/bash", "-cu"]
 
-# Pick up some TF dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
         build-essential \
-        cuda-command-line-tools-${CUDA/./-} \
-        cuda-cublas-${CUDA/./-} \
-        cuda-cufft-${CUDA/./-} \
-        cuda-curand-${CUDA/./-} \
-        cuda-cusolver-${CUDA/./-} \
-        cuda-cusparse-${CUDA/./-} \
+        cmake \
+        g++-4.8 \
+        git \
         curl \
-        libcudnn7=${CUDNN}+cuda${CUDA} \
-        libfreetype6-dev \
-        libhdf5-serial-dev \
-        libzmq3-dev \
-        pkg-config \
-        rsync \
-        software-properties-common \
-        unzip
+        vim \
+        wget \
+        ca-certificates \
+        libcudnn7=${CUDNN_VERSION} \
+        libnccl2=${NCCL_VERSION} \
+        libnccl-dev=${NCCL_VERSION} \
+        libjpeg-dev \
+        libpng-dev \
+        python${PYTHON_VERSION} \
+        python${PYTHON_VERSION}-dev \
+        librdmacm1 \
+        libibverbs1 \
+        ibverbs-providers
 
-RUN [ ${ARCH} = ppc64le ] || (apt-get update && \
-        apt-get install nvinfer-runtime-trt-repo-ubuntu1604-5.0.2-ga-cuda${CUDA} \
-        && apt-get update \
-        && apt-get install -y --no-install-recommends libnvinfer5=5.0.2-1+cuda${CUDA} \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*)
+RUN if [[ "${PYTHON_VERSION}" == "3.6" ]]; then \
+        apt-get install -y python${PYTHON_VERSION}-distutils; \
+    fi
+RUN ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
 
-# For CUDA profiling, TensorFlow requires CUPTI.
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
 
-# ===> ANACONDA3 DOCKERFILE
+# Install TensorFlow, Keras, PyTorch
+RUN pip install future typing
+RUN pip install numpy \
+        tensorflow-gpu==${TENSORFLOW_VERSION} \
+        keras \
+        h5py
+RUN pip install https://download.pytorch.org/whl/cu100/torch-${PYTORCH_VERSION}-$(python -c "import wheel.pep425tags as w; print('-'.join(w.get_supported()[0][:-1]))")-manylinux1_x86_64.whl \
+        https://download.pytorch.org/whl/cu100/torchvision-${TORCHVISION_VERSION}-$(python -c "import wheel.pep425tags as w; print('-'.join(w.get_supported()[0][:-1]))")-manylinux1_x86_64.whl
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH /opt/conda/bin:$PATH
+# Install Open MPI
+RUN mkdir /tmp/openmpi && \
+    cd /tmp/openmpi && \
+    wget https://www.open-mpi.org/software/ompi/v4.0/downloads/openmpi-4.0.0.tar.gz && \
+    tar zxf openmpi-4.0.0.tar.gz && \
+    cd openmpi-4.0.0 && \
+    ./configure --enable-orterun-prefix-by-default && \
+    make -j $(nproc) all && \
+    make install && \
+    ldconfig && \
+    rm -rf /tmp/openmpi
 
-RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1
+# Install Horovod, temporarily using CUDA stubs
+RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
+    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 \
+         pip install --no-cache-dir horovod && \
+    ldconfig
 
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    rm ~/anaconda.sh && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
+# Install OpenSSH for MPI to communicate between containers
+RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
+    mkdir -p /var/run/sshd
 
-RUN apt-get install -y curl grep sed dpkg && \
-    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
-    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
-    dpkg -i tini.deb && \
-    rm tini.deb && \
-    apt-get clean
-ENTRYPOINT [ "/usr/bin/tini", "--" ]
+# Allow OpenSSH to talk to containers without asking for confirmation
+RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
+    echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
+    mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
-## ===> install conda tensorflow-gpu, takes a long time
-#RUN conda update -n base conda
-#RUN conda install tensorflow-gpu
-#
-## ===> install conda pytorch
-#RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
-#
-## ===> Ronny's custom commands
-#
-## apt-get packages
-#RUN apt-get install -y openssh-server && apt-get clean
-#RUN apt-get install -y vim && apt-get clean
-##RUN apt-get install -y xorg && apt-get clean
-##RUN apt-get install -y openbox && apt-get clean
-#
-## permit root login via ssh
-#RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
-#RUN service ssh restart
-#RUN echo 'root:password' | chpasswd
-#
-### install bigfloat [not needed anymore]
-##RUN apt-get install libgmp3-dev
-##RUN apt-get install libmpfr-dev libmpfr-doc libmpfr4 libmpfr4-dbg
-##RUN pip install bigfloat
-#
-## ===> Force rebuild beyond this point (dont cache)
+# ==> RONNY CUSTOM
+## Force rebuild beyond this point (dont cache)
 ## Run this command when building or just change the value here
 ## docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
-##ARG CACHEBUST=6
-#
-## useful python packages
-#RUN pip install opencv-python
-#RUN pip install editdistance
-#RUN pip install comet_ml
-#RUN pip install cometml_api
-#RUN pip install sigopt
-#RUN pip install tensorflow-hub
-#RUN pip install tensorflow-probability
-#RUN pip install joblib
-#
-## pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
-#RUN git clone https://github.com/wronnyhuang/bin /root/bin
-#RUN cp /root/bin/.bashrc /root/
-#RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
-#
-## install vim plugins
-#RUN sh /root/bin/install_vundle.sh
-#RUN sh /root/bin/install_commentary_instructions.sh
-#
-## setup scripts for ssh tunneling, aka copy ngrok and nssh into home
-#RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
-#
-## remove bin folder
-#RUN rm -rf /root/bin
-#
-#WORKDIR "/root"
-#CMD [ "/bin/bash" ]
+ARG CACHEBUST=1
 
+# permit root login via ssh
+RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
+RUN sed -i -e 's/#Permit/Permit/g' /etc/ssh/sshd_config
+RUN service ssh restart
+RUN echo 'root:password' | chpasswd
 
-
+# useful apt packages
+#RUN apt install screen
+RUN apt-get install htop
 # cache github passwords so dont need to login everytime
 RUN git config --global credential.helper cache
-RUN apt install screen
-RUN apt-get install htop
+
+# pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
+RUN git clone https://github.com/wronnyhuang/bin /root/bin
+RUN cp /root/bin/.bashrc /root/
+RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
+
+# setup scripts for ssh tunneling, aka copy ngrok and nssh into home
+RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
+
+# install vim plugins
+RUN sh /root/bin/install_vundle.sh
+RUN sh /root/bin/install_commentary_instructions.sh
+
+# remove bin folder
+RUN rm -rf /root/bin
+
+# ==> USEFUL PYTHON PACKAGES
+RUN python -m pip install -U pip && \
+    python -m pip install -U matplotlib
+RUN pip install -U scikit-learn
+RUN pip install pandas
+RUN pip install comet_ml
+RUN pip install cometml_api
+RUN pip install sigopt
+RUN pip install tensorflow-hub
+
+WORKDIR "/root"
+CMD [ "/bin/bash" ]
