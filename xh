@@ -6,7 +6,7 @@ if [ $userhost = "r" ]; then
 elif [ $userhost = "m" ]; then
 	ssh_with_options.sh rhuang max.cs.umd.edu $input
 elif [ $userhost = "t" ]; then
-	ssh_with_options.sh ronny tomg3264.cs.umd.edu $input
+	ssh_with_options.sh ronny dohaeris.umiacs.umd.edu $input
 elif [ $userhost = "v" ]; then
 	ssh_with_options.sh ronny dsvm6usdum456zy76.eastus.cloudapp.azure.com $input
 elif [ $userhost = "u" ]; then
