@@ -95,7 +95,6 @@ RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
 # useful apt packages
-RUN apt install screen
 RUN apt-get install htop
 # cache github passwords so dont need to login everytime
 RUN git config --global credential.helper cache
