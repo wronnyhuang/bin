@@ -70,8 +70,7 @@ RUN mkdir /tmp/openmpi && \
 
 # Install Horovod, temporarily using CUDA stubs
 RUN ldconfig /usr/local/cuda/targets/x86_64-linux/lib/stubs && \
-    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 \
-         pip install --no-cache-dir horovod && \
+    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 pip install --no-cache-dir horovod && \
     ldconfig
 
 # Install OpenSSH for MPI to communicate between containers
@@ -91,12 +90,12 @@ ARG CACHEBUST=1
 
 # permit root login via ssh
 RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
-RUN sed -i -e 's/#Permit/Permit/g' /etc/ssh/sshd_config
+RUN sed -i -e 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
 RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
 # useful apt packages
-#RUN apt install screen
+RUN apt install screen
 RUN apt-get install htop
 # cache github passwords so dont need to login everytime
 RUN git config --global credential.helper cache
@@ -119,6 +118,7 @@ RUN rm -rf /root/bin
 # ==> USEFUL PYTHON PACKAGES
 RUN python -m pip install -U pip && \
     python -m pip install -U matplotlib
+RUN pip install mpi4py
 RUN pip install -U scikit-learn
 RUN pip install pandas
 RUN pip install comet_ml
