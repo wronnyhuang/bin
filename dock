@@ -9,7 +9,7 @@ docker stop $(docker ps -aq -f "name=horovodcustom") && docker rm $(docker ps -a
 
 # start container
 docker run --runtime=nvidia -it \
---privileged \
+--privileged --network=host \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
 -v ~/datasets:/root/datasets \
