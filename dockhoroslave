@@ -1,0 +1,6 @@
+#!/bin/bash
+
+nvidia-docker run -it --network=host \
+-v ~/.ssh:/root/.ssh \
+wrhuang/default:horovodcustom \
+    bash -c "/usr/sbin/sshd -p 12345; sleep infinity"
