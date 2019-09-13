@@ -2,5 +2,7 @@
 
 nvidia-docker run -it --network=host \
 -v ~/.ssh:/root/.ssh \
-wrhuang/default:horovodcustom \
+wrhuang/horovod \
     bash -c "/usr/sbin/sshd -p 12345; sleep infinity"
+
+mpirun -np 2 -H localhost:1,max.cs.umd.edu:1 --allow-run-as-root -bind-to none -map-by slot -mca plm_rsh_args "-p 12345" -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib -mca btl_tcp_if_exclude lo python keras_mnist_advanced.py
