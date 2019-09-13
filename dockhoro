@@ -1,0 +1,10 @@
+#!/bin/bash
+
+nvidia-docker run -it --network=host \
+-v /mnt/share/ssh:/root/.ssh \
+-v ~/bin:/root/bin \
+-v ~/ckpt:/root/ckpt \
+-v ~/datasets:/root/datasets \
+-v ~/repo:/root/repo \
+-v ~/misc:/root/misc \
+wrhuang/default:horovodcustom
