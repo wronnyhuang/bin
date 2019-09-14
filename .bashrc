@@ -109,6 +109,9 @@ export LANGUAGE="en_US.UTF-8"
 # screen autocomplete
 complete -C "perl -e '@w=split(/ /,\$ENV{COMP_LINE},-1);\$w=pop(@w);for(qx(screen -ls)){print qq/\$1\n/ if (/^\s*\$w/&&/(\d+\.\w+)/||/\d+\.(\$w\w*)/)}'" screen
 
+# aliases
+alias mpi="mpirun --allow-run-as-root -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib -mca btl_tcp_if_exclude lo,docker0 -x NCCL_SOCKET_IFNAME=^lo,docker0"
+
 # setup path and terminal colors
 export PATH=/root/bin:$PATH
 LS_COLORS=$LS_COLORS:'di=1;31:ln=34' ; export LS_COLORS;
