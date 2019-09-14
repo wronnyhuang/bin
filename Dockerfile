@@ -125,5 +125,7 @@ RUN pip install cometml_api
 RUN pip install sigopt
 RUN pip install tensorflow-hub
 
+RUN apt-get install netcat net-tools
+
 WORKDIR "/root"
 CMD [ "/bin/bash" ]
