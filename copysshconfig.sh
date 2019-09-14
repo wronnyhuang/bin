@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cp ~/bin/.ssh/config ~/.ssh/
+cp /root/bin/.ssh/config /root/.ssh/
