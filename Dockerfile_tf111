@@ -2,7 +2,7 @@
 # build -f Dockerfile -t wrhuang/default:dev .
 
 #==> HOROVOD OFFICIAL DOCKERFILE with mxnet and examples removed
-FROM nvidia/cuda:9.0-devel-ubuntu18.04
+FROM nvidia/cuda:9.0-ubuntu18.04
 
 # TensorFlow version is tightly coupled to CUDA and cuDNN so it should be selected carefully
 ENV TENSORFLOW_VERSION=1.11.0
