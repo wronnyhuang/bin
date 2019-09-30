@@ -5,7 +5,7 @@ echo `hostname` > ~/misc/hostname.log
 mkdir ~/misc
 
 # kill other docker containers
-docker stop $(docker ps -aq -f "name=horovodcustom") && docker rm $(docker ps -aq -f "name=horovodcustom")
+docker stop $(docker ps -aq -f "name=horovodcustomngrok") && docker rm $(docker ps -aq -f "name=horovodcustomngrok")
 
 # start container
 docker run --runtime=nvidia -it \
@@ -15,6 +15,7 @@ docker run --runtime=nvidia -it \
 -v ~/datasets:/root/datasets \
 -v ~/repo:/root/repo \
 -v ~/misc:/root/misc \
+-v /datasets:/root/datasets_root \
 -d \
 --shm-size 56G \
 --name horovodcustom \
