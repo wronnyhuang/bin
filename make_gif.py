@@ -5,8 +5,8 @@
 
 
 import sys
-print(sys.prefix)
-print(sys.executable)
+# print(sys.prefix)
+# print(sys.executable)
 import imageio
 import numpy as np
 import os
