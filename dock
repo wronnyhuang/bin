@@ -18,7 +18,7 @@ docker run --runtime=nvidia -it \
 -v /datasets:/root/datasets_root \
 -d \
 --shm-size 56G \
---name horovodcustomngrok \
+--name horovodcustom3 \
 wrhuang/default:horovodcustom bash > ~/misc/containerId.log
 
 #sleep 2

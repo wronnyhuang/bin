@@ -110,9 +110,15 @@ export LANGUAGE="en_US.UTF-8"
 complete -C "perl -e '@w=split(/ /,\$ENV{COMP_LINE},-1);\$w=pop(@w);for(qx(screen -ls)){print qq/\$1\n/ if (/^\s*\$w/&&/(\d+\.\w+)/||/\d+\.(\$w\w*)/)}'" screen
 
 # aliases
-alias mpi="mpirun --allow-run-as-root -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib -mca btl_tcp_if_exclude lo,docker0 -x NCCL_SOCKET_IFNAME=^lo,docker0 "
+alias mpirun="python main.py -tag=clabel-stagger -poisonclass=0 -targetclass=3 -ytargetadv=0 -ntarget=1 -nreplay=2 -nadapt=2 -stagger=2 -weightset=standard-125 -net=ResNet -ncraftstep=29 -victimperiod=2 -craftrate=200 -batchsize=125 -nbatch=400 -npoison=5000 -optimizer=mom -gpu 0 1 2"
 alias noh="tail -f nohup.out"
 alias pkill="pkill -f"
+
+# allow mpi run as root
+OMPI_ALLOW_RUN_AS_ROOT=1
+OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+nh() { nohup $@ & }
+npirun() { nohup mpirun --allow-run-as-root -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib -mca btl_tcp_if_exclude lo,docker0 -x NCCL_SOCKET_IFNAME=^lo,docker0 --oversubscribe $@ & }
 
 # setup path and terminal colors
 export PATH=/root/bin:$PATH
