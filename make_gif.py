@@ -1,12 +1,12 @@
 # ---------------------------------
 # MAKE GIF FROM IMAGES IN A DIRECTORY
 # Example
-# python make_gif.py <directory_of_images> <output_filename>
+# python make_gif.py <directory_of_images> <output_filename> <duration>
 
 
 import sys
-# print(sys.prefix)
-# print(sys.executable)
+print(sys.prefix)
+print(sys.executable)
 import imageio
 import numpy as np
 import os
@@ -21,6 +21,10 @@ if len(sys.argv)>2:
   outFile = sys.argv[2]
 else:
   outFile = 'giffy.gif'
+if len(sys.argv) > 3:
+  duration = sys.argv[3]
+else:
+  duration = .1
 
 print('==============> Making gif from files in '+path)
 list_images = glob(join(path, '*'))
@@ -44,5 +48,5 @@ pool = Pool()
 images = pool.map(parallel, list_images)
 
 print('Combining images into gif')
-imageio.mimsave(outFile, images, 'GIF', duration=.1)
+imageio.mimsave(outFile, images, 'GIF', duration=duration)
 print('gif saved in '+str(outFile))
