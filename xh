@@ -2,9 +2,9 @@
 userhost=$1
 input=$2
 if [ $userhost = "r" ]; then
-	ssh_with_options.sh ronny tricky.cs.umd.edu $input
+	ssh_with_options.sh ronny tricky.umiacs.umd.edu $input
 elif [ $userhost = "m" ]; then
-	ssh_with_options.sh rhuang max.cs.umd.edu $input
+	ssh_with_options.sh rhuang max.umiacs.umd.edu $input
 elif [ $userhost = "t" ]; then
 	ssh_with_options.sh ronny dohaeris.umiacs.umd.edu $input
 elif [ $userhost = "v" ]; then
