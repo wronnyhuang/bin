@@ -3,7 +3,7 @@ userhost=$1
 input=$2
 if [ $userhost = "c" ]; then
 	ssh_with_options.sh rhuang cmlsub00.umiacs.umd.edu $input
-if [ $userhost = "r" ]; then
+elif [ $userhost = "r" ]; then
 	ssh_with_options.sh ronny tricky.umiacs.umd.edu $input
 elif [ $userhost = "m" ]; then
 	ssh_with_options.sh rhuang max.umiacs.umd.edu $input
