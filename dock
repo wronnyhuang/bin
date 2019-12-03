@@ -9,6 +9,7 @@ docker stop $(docker ps -aq -f "name=horovodcustomngrok") && docker rm $(docker 
 
 # start container
 docker run --runtime=nvidia -it \
+--gpus all \
 --privileged \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
