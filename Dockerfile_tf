@@ -1,0 +1,62 @@
+# To build this, run the following command
+# build -f Dockerfile -t wrhuang/default:dev .
+
+#==> HOROVOD OFFICIAL DOCKERFILE with mxnet and examples removed
+FROM tensorflow/tensorflow:1.10.1-gpu-py3
+
+# Install OpenSSH for MPI to communicate between containers
+RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
+    mkdir -p /var/run/sshd
+
+# Allow OpenSSH to talk to containers without asking for confirmation
+RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_config.new && \
+    echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config.new && \
+    mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
+
+# ==> RONNY CUSTOM
+## Force rebuild beyond this point (dont cache)
+## Run this command when building or just change the value here
+## docker build -t wrhuang/default --build-arg CACHEBUST=$(date +%s) .
+ARG CACHEBUST=1
+
+# permit root login via ssh
+RUN sed -i -e 's/prohibit-password/yes/g' /etc/ssh/sshd_config
+RUN sed -i -e 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
+RUN service ssh restart
+RUN echo 'root:password' | chpasswd
+
+# useful apt packages
+RUN apt-get install htop
+# cache github passwords so dont need to login everytime
+RUN git config --global credential.helper cache
+
+# pull scripts from github bin and copy .bashrc, .vimrc, and .inputrc
+RUN git clone https://github.com/wronnyhuang/bin /root/bin
+RUN cp /root/bin/.bashrc /root/
+RUN cp /root/bin/.vimrc /root/bin/.inputrc /root/
+
+# setup scripts for ssh tunneling, aka copy ngrok and nssh into home
+RUN cp /root/bin/nsshguest /root/bin/nssh /root/bin/ngrok /root/
+
+# install vim plugins
+RUN sh /root/bin/install_vundle.sh
+RUN sh /root/bin/install_commentary_instructions.sh
+
+# remove bin folder
+RUN rm -rf /root/bin
+
+# ==> USEFUL PYTHON PACKAGES
+RUN python -m pip install -U pip && \
+    python -m pip install -U matplotlib
+RUN pip install mpi4py
+RUN pip install -U scikit-learn
+RUN pip install pandas
+RUN pip install comet_ml
+RUN pip install cometml_api
+RUN pip install sigopt
+RUN pip install tensorflow-hub
+
+RUN apt-get install netcat net-tools
+
+WORKDIR "/root"
+CMD [ "/bin/bash" ]
