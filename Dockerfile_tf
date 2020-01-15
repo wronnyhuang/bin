@@ -2,11 +2,16 @@
 # build -f Dockerfile -t wrhuang/default:dev .
 
 #==> HOROVOD OFFICIAL DOCKERFILE with mxnet and examples removed
-FROM tensorflow/tensorflow:1.11.0-gpu-py3
+FROM tensorflow/tensorflow:1.10.1-gpu-py3
+
+RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
+        build-essential \
+        git \
+        curl \
+        vim \
+        wget \
 
 # Install OpenSSH for MPI to communicate between containers
-RUN apt-get update
-RUN apt-get upgrade
 RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
     mkdir -p /var/run/sshd
 
@@ -57,7 +62,6 @@ RUN pip install pandas
 RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
-RUN pip install tensorflow-hub
 
 RUN apt-get install netcat net-tools
 
