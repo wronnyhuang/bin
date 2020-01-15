@@ -1,7 +1,6 @@
 # To build this, run the following command
 # build -f Dockerfile -t wrhuang/default:dev .
 
-#==> HOROVOD OFFICIAL DOCKERFILE with mxnet and examples removed
 FROM tensorflow/tensorflow:1.10.1-gpu-py3
 
 RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
@@ -9,7 +8,7 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
         git \
         curl \
         vim \
-        wget \
+        wget
 
 # Install OpenSSH for MPI to communicate between containers
 RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
