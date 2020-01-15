@@ -55,7 +55,6 @@ RUN rm -rf /root/bin
 # ==> USEFUL PYTHON PACKAGES
 RUN python -m pip install -U pip && \
     python -m pip install -U matplotlib
-RUN pip install mpi4py
 RUN pip install -U scikit-learn
 RUN pip install pandas
 RUN pip install comet_ml
