@@ -61,7 +61,7 @@ RUN pip install comet_ml
 RUN pip install cometml_api
 RUN pip install sigopt
 
-RUN apt-get install netcat net-tools
+RUN apt-get -y install netcat net-tools
 
 WORKDIR "/root"
 CMD [ "/bin/bash" ]
