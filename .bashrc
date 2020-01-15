@@ -109,6 +109,7 @@ export LANGUAGE="en_US.UTF-8"
 complete -C "perl -e '@w=split(/ /,\$ENV{COMP_LINE},-1);\$w=pop(@w);for(qx(screen -ls)){print qq/\$1\n/ if (/^\s*\$w/&&/(\d+\.\w+)/||/\d+\.(\$w\w*)/)}'" screen
 
 # aliases
+alias psaux="ps aux | grep"
 alias noh="tail -f nohup.out"
 alias pk="pkill -f"
 alias smi='nvidia-smi'

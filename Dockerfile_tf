@@ -2,9 +2,11 @@
 # build -f Dockerfile -t wrhuang/default:dev .
 
 #==> HOROVOD OFFICIAL DOCKERFILE with mxnet and examples removed
-FROM tensorflow/tensorflow:1.10.1-gpu-py3
+FROM tensorflow/tensorflow:1.11.0-gpu-py3
 
 # Install OpenSSH for MPI to communicate between containers
+RUN apt-get update
+RUN apt-get upgrade
 RUN apt-get install -y --no-install-recommends openssh-client openssh-server && \
     mkdir -p /var/run/sshd
 
@@ -26,6 +28,7 @@ RUN service ssh restart
 RUN echo 'root:password' | chpasswd
 
 # useful apt packages
+RUN apt-get install screen
 RUN apt-get install htop
 # cache github passwords so dont need to login everytime
 RUN git config --global credential.helper cache
