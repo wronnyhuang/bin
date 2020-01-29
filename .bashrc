@@ -125,6 +125,18 @@ alias dis="python dispatch.py"
 alias sc="scancel"
 alias mine="sq | grep rhuang"
 
+alias dockrun="docker run --runtime=nvidia -it \
+--privileged \
+-v ~/bin:/root/bin \
+-v ~/ckpt:/root/ckpt \
+-v ~/datasets:/root/datasets \
+-v ~/repo:/root/repo \
+-v ~/misc:/root/misc \
+-v /datasets:/root/datasets_root \
+-d \
+--shm-size 56G"
+
+
 function pretty_csv {
     column -t -s, -n "$@" | less -F -S -X -K
 }
