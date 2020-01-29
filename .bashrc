@@ -114,6 +114,16 @@ alias noh="tail -f nohup.out"
 alias pk="pkill -f"
 alias smi='nvidia-smi'
 alias mpi="mpirun --allow-run-as-root -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib -mca btl_tcp_if_exclude lo,docker0 -x NCCL_SOCKET_IFNAME=^lo,docker0 --oversubscribe"
+
+alias mpic="mpirun -bind-to none -map-by slot -mca pml ob1 -mca btl ^openib --oversubscribe"
+alias sq="squeue"    # display the entire SLURM queue of submitted jobs
+alias gpu1="srun --pty --gres=gpu:1 --mem=16G --qos=default --time=01:00:00 bash"  # launch a VM with a single GPU for 1 hour
+alias gpu4="srun --pty --gres=gpu:4 --mem=64G --qos=default --time=23:59:00 bash"  # launch a VM with a 4 GPU for 24 hour
+alias install="srun --pty --mem=32G --cpus-per-task=8 --qos=medium --time=08:00:00 bash"
+alias dis="python dispatch.py"
+alias sc="scancel"
+alias mine="sq | grep rhuang"
+
 function pretty_csv {
     column -t -s, -n "$@" | less -F -S -X -K
 }

@@ -9,7 +9,6 @@ docker stop $(docker ps -aq -f "name=horovodcustomngrok") && docker rm $(docker 
 
 # start container
 docker run --runtime=nvidia -it \
---gpus all \
 --privileged \
 -v ~/bin:/root/bin \
 -v ~/ckpt:/root/ckpt \
@@ -19,8 +18,8 @@ docker run --runtime=nvidia -it \
 -v /datasets:/root/datasets_root \
 -d \
 --shm-size 56G \
---name jupyter \
-wrhuang/default:horovodcustom bash > ~/misc/containerId.log
+--name horovodcustom \
+wrhuang/default:horovodcustom bash # > ~/misc/containerId.log
 
 #sleep 2
 # run command inside container to start ssh server
