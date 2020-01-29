@@ -112,6 +112,7 @@ complete -C "perl -e '@w=split(/ /,\$ENV{COMP_LINE},-1);\$w=pop(@w);for(qx(scree
 alias psaux="ps aux | grep"
 alias noh="tail -f nohup.out"
 alias pk="pkill -f"
+alias pkr="pkill -f runscript && pkill -f python"
 alias smi='nvidia-smi'
 alias mpi="mpirun --allow-run-as-root -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib -mca btl_tcp_if_exclude lo,docker0 -x NCCL_SOCKET_IFNAME=^lo,docker0 --oversubscribe"
 
