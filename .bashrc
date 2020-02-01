@@ -123,7 +123,8 @@ alias gpu4="srun --pty --gres=gpu:4 --mem=64G --qos=default --time=23:59:00 bash
 alias install="srun --pty --mem=32G --cpus-per-task=8 --qos=medium --time=08:00:00 bash"
 alias dis="python dispatch.py"
 alias sc="scancel"
-alias mine="sq | grep rhuang"
+alias sm="sq | grep `whoami`"
+alias wats="watch -n .1 squeue"
 
 alias dockrun="docker run --runtime=nvidia -it \
 --privileged \
@@ -134,7 +135,7 @@ alias dockrun="docker run --runtime=nvidia -it \
 -v ~/misc:/root/misc \
 -v /datasets:/root/datasets_root \
 -d \
---shm-size 56G"
+--shm-size 120G"
 
 
 function pretty_csv {
