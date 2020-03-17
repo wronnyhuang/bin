@@ -152,3 +152,5 @@ npirun() { nohup mpirun --allow-run-as-root -bind-to none -map-by slot -x NCCL_D
 export PATH=/root/bin:$PATH
 LS_COLORS=$LS_COLORS:'di=1;31:ln=34' ; export LS_COLORS;
 echo Welcome to wrhuang/default docker container - `cat ~/misc/hostname.log`
+
+
