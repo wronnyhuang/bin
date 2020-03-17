@@ -17,6 +17,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+echo hi
 export PATH="/cmlscratch/$user/anaconda3/bin:$PATH"
 conda activate tf114
 cd /cmlscratch/$user/metapoison
