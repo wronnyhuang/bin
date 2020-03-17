@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-user=`whoami`
+user=rhuang
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
