@@ -125,6 +125,7 @@ alias dis="python dispatch.py"
 alias sc="scancel"
 alias sm="sq | grep `whoami`"
 alias wats="watch -n .1 squeue"
+alias pull="git pull"
 
 alias dockrun="docker run --runtime=nvidia -it \
 --privileged \
@@ -155,6 +156,7 @@ echo Welcome to wrhuang/default docker container - `cat ~/misc/hostname.log`
 
 if [ `hostname` = cmlsub00.umiacs.umd.edu ]
 then
+    echo `hostname`
     # >>> conda initialize >>>
     user=`whoami`
     # !! Contents within this block are managed by 'conda init' !!
