@@ -55,18 +55,19 @@ Plugin 'tpope/vim-commentary'
 " filetype plugin indent on
 syntax on
 colorscheme elflord 
-set tabstop=2
-set softtabstop=0 noexpandtab
-set shiftwidth=2
 
-set expandtab " Make sure that every file does not use real tabs, just spaces
-set shiftround  " Round indent to multiple of 'shiftwidth'
-set autoindent  " Copy indent from current line, over to the new line
+" set tabstop=2
+" set softtabstop=0 noexpandtab
+" set shiftwidth=2
 
 " Set the tab width
 let s:tabwidth=2
 au Filetype * let &l:tabstop = s:tabwidth
 au Filetype * let &l:shiftwidth = s:tabwidth
 au Filetype * let &l:softtabstop = s:tabwidth
+
+set expandtab " Make sure that every file does not use real tabs, just spaces
+set autoindent  " Copy indent from current line, over to the new line
+set shiftround  " Round indent to multiple of 'shiftwidth'
 
 source ~/bin/keymap.vim
