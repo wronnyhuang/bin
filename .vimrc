@@ -52,22 +52,11 @@ set keymodel=startsel,stopsel
 set mouse=i
 Plugin 'tpope/vim-commentary'
 
-:noremap J <c-d> 
-:noremap K <c-u>
-:noremap U <c-r>
-:noremap , gT
-:noremap . gt
-:noremap t .
-:noremap ] ;
-:noremap [ ,
-:noremap ; 5k
-:noremap ' 5j
-:noremap H ^
-:noremap L $
-:noremap Y y$
+" filetype plugin indent on
+syntax on
+colorscheme elflord 
 set tabstop=2
 set softtabstop=0 noexpandtab
 set shiftwidth=2
-filetype plugin indent on
-syntax on
-colorscheme elflord 
+
+source ~/bin/keymap.vim
