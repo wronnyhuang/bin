@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-sensible'
+" Plugin 'tpope/vim-sensible'
 Plugin 'wincent/terminus'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -31,7 +31,7 @@ Plugin 'wincent/terminus'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+" filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -58,5 +58,15 @@ colorscheme elflord
 set tabstop=2
 set softtabstop=0 noexpandtab
 set shiftwidth=2
+
+set expandtab " Make sure that every file does not use real tabs, just spaces
+set shiftround  " Round indent to multiple of 'shiftwidth'
+set autoindent  " Copy indent from current line, over to the new line
+
+" Set the tab width
+let s:tabwidth=2
+au Filetype * let &l:tabstop = s:tabwidth
+au Filetype * let &l:shiftwidth = s:tabwidth
+au Filetype * let &l:softtabstop = s:tabwidth
 
 source ~/bin/keymap.vim
