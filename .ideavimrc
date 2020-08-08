@@ -1,0 +1,19 @@
+:noremap <Space>c :action CompareClipboardWithSelection<CR>
+:noremap <Space>m :action MoveEditorToOppositeTabGroup<CR>
+:noremap <Space>. :action NextSplitter<CR>
+:noremap <Space>, :action PrevSplitter<CR>
+:noremap <Space>u :action UnsplitAll<CR>
+:noremap <Space>s :action SplitVertically<CR>
+:noremap <Space>b :action ToggleBookmark<CR>
+:noremap <Space>g :action SelectIn<CR>
+:noremap <Space><CR> :action QuickEvaluateExpression<CR>
+:noremap <Space>e :action EvaluateExpression<CR>
+:noremap <Space>k :action EditorCloneCaretBelow<CR>
+:noremap <Space>j :action EditorCloneCaretAbove<CR>
+:noremap gb :action ShowBookmarks<CR>
+:noremap g, :action GotoPreviousBookmark<CR>
+:noremap g. :action GotoNextBookmark<CR>
+:noremap ) :action EditorSelectWord<CR>
+:noremap ( :action EditorUnSelectWord<CR>
+
+source ~/bin/keymap.vim
