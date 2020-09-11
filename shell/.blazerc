@@ -1,0 +1,10 @@
+# test
+test --test_output=all
+build --nostamp
+build -c opt
+startup --host_jvm_args=-Xmx18g --host_jvm_args=-Xms18g
+# The following line was auto-added by the DeepMind .bashrc.
+# See http://go/dmtf.
+# If you don't want this behaviour, you may comment it out,
+# but do not delete it as it will be automatically re-added.
+# import %workspace%/learning/deepmind/config/blazerc
